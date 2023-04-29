@@ -1,0 +1,1 @@
+{"version":3,"file":"CategoriesEntity.js","sourceRoot":"","sources":["../../../../src/infrastructure/database/mapper/CategoriesEntity.ts"],"names":[],"mappings":";;;AAAA,wEAA4D;AAC5D,qCAA2D;AAI9C,QAAA,gBAAgB,GAAG,IAAI,sBAAY,CAAiB;IAC7D,IAAI,EAAE,eAAe;IACrB,SAAS,EAAE,UAAU;IACrB,MAAM,EAAE,6BAAa;IACrB,OAAO,kCACA,oBAAU,KACb,IAAI,EAAE;YACF,IAAI,EAAE,MAAM;SAGf,GACR;CAAC,CAAC,CAAA"}
