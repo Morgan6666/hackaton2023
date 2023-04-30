@@ -10,4 +10,9 @@ export declare abstract class ICategory<Entity> {
     abstract updateRelaxInfo(entity: Entity): any;
     abstract updateAttractionInfo(entity: Entity): any;
     abstract updateEventInfo(entity: Entity): any;
+    abstract addRoadMap(entity: Entity): any;
+    abstract getRelaxInfo(): any;
+    abstract getEventsInfo(): any;
+    abstract getShopInfo(): any;
+    abstract getAttractionInfo(): any;
 }

@@ -5054,3 +5054,513 @@ WHERE user_id = (SELECT id FROM users WHERE email='test@mail.ru');
 [2023-04-28T23:58:04.394Z][QUERY]: START TRANSACTION
 [2023-04-28T23:58:04.395Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
 [2023-04-28T23:58:04.398Z][QUERY]: COMMIT
+[2023-04-29T12:04:19.878Z][QUERY]: SELECT * FROM current_schema()
+[2023-04-29T12:04:19.897Z][QUERY]: SELECT version();
+[2023-04-29T12:04:19.906Z][QUERY]: START TRANSACTION
+[2023-04-29T12:04:19.907Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+[2023-04-29T12:04:19.910Z][QUERY]: COMMIT
+[2023-04-29T12:04:35.000Z][QUERY]: INSERT  INTO road_map(events_id, shop_id, user_id, relax_id, attractions_id) VALUES(1,1,1,1,1) RETURNING id;
+[2023-04-29T12:37:06.199Z][QUERY]: SELECT * FROM current_schema()
+[2023-04-29T12:37:06.224Z][QUERY]: SELECT version();
+[2023-04-29T12:37:06.231Z][QUERY]: START TRANSACTION
+[2023-04-29T12:37:06.232Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+[2023-04-29T12:37:06.236Z][QUERY]: COMMIT
+[2023-04-29T15:07:50.739Z][QUERY]: SELECT * FROM current_schema()
+[2023-04-29T15:07:50.760Z][QUERY]: SELECT version();
+[2023-04-29T15:07:50.761Z][QUERY]: START TRANSACTION
+[2023-04-29T15:07:50.762Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+[2023-04-29T15:07:50.765Z][QUERY]: COMMIT
+[2023-04-29T15:15:32.638Z][QUERY]: SELECT
+      quest_info.id,
+      qn.name as quest_name,
+      qn.description as quest_description,
+      qp.name as place_name,
+      qp.description as place_description,
+      en.name as ethaps_name,
+      en.description ethaps_description
+  FROM quest_info
+  JOIN ethaps_name en on en.id = quest_info.ethaps_name_id
+  JOIN quest_name qn on qn.id = quest_info.quest_name_id
+  join quest_place qp on qp.id = quest_info.quest_place_id;
+[2023-04-29T15:18:56.551Z][QUERY]: INSERT INTO users_quest(quest_name_id, user_id) VALUES((SELECT id FROM quest_name WHERE name ='Тест'), 1);
+[2023-04-29T15:18:56.557Z][QUERY]: INSERT INTO quest_ethaps(status_id, user_id, quest_id) VALUES(2,1,(SELECT id FROM quest_info WHERE quest_name_id=(SELECT id FROM quest_name WHERE name ='Тест')));
+[2023-04-29T15:20:40.658Z][QUERY]: SELECT
+      qn.name as quest_name,
+      qn.description as quest_description,
+      en.name as ethaps_name,
+      en.description as ethaps_description,
+      qs.name as status_name
+      FROM quest_ethaps
+      INNER JOIN quest_status qs on qs.id = quest_ethaps.status_id
+      INNER JOIN quest_info qi on qi.id = quest_ethaps.quest_id
+      INNER JOIN ethaps_name en on qi.ethaps_name_id = en.id
+      INNER JOIN quest_name qn ON qi.quest_name_id = qn.id
+      INNER JOIN quest_place qp ON qi.quest_place_id = qp.id
+  
+  WHERE user_id = 1;
+[2023-04-29T15:31:00.082Z][QUERY]: UPDATE quest_ethaps SET status_id = (SELECT id FROM quest_status WHERE name ='Не пройден') WHERE user_id = 1 AND quest_id = (SELECT id FROM quest_info WHERE quest_name_id = (SELECT id FROM quest_name WHERE name='Тест'));
+[2023-04-29T18:38:04.087Z][QUERY]: 
+    SELECT
+      r.id as road_map_id,
+      s.name as shop_name,
+      s.time_start as shop_time_start,
+      s.time_end as shop_time_end,
+      s.description as shop_description,
+      e.name as event_name,
+      e.time_start as event_time_start,
+      e.time_end as event_time_end,
+      e.description as event_description,
+      a.name as attraction_name,
+      a.description as attraction_description,
+      a.time_start as attraction_time_start,
+      a.time_end as attraction_time_end,
+      r2.name as relax_name,
+      r2.description as relax_description,
+      r2.time_start as relax_time_start,
+      r2.time_end as relax_time_end
+
+    FROM road_map r
+      JOIN events e on e.id = r.events_id
+      JOIN shops s on r.shop_id = s.id
+      JOIN attractions a on a.id = r.attractions_id
+      JOIN relax r2 on r.relax_id = r2.id
+      WHERE r.id = 1 AND  r.user_id=1;
+[2023-04-30T02:39:27.635Z][QUERY]: SELECT * FROM current_schema()
+[2023-04-30T02:39:27.654Z][QUERY]: SELECT version();
+[2023-04-30T02:39:27.655Z][QUERY]: START TRANSACTION
+[2023-04-30T02:39:27.656Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+[2023-04-30T02:39:27.661Z][QUERY]: COMMIT
+[2023-04-30T02:41:43.424Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:02:14.729Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:05:36.080Z][QUERY]: SELECT
+      events.name as event_name,
+      events.time_start,
+      events.time_end,
+      events.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM events
+  JOIN category c on c.id = events.category_id
+  JOIN cities c2 on events.city_id = c2.id;
+[2023-04-30T03:07:46.164Z][QUERY]: SELECT
+      attractions.name as shop_name,
+      attractions.time_start,
+      attractions.time_end,
+      attractions.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM attractions
+  JOIN category c on c.id = attractions.category_id
+  JOIN cities c2 on attractions.city_id = c2.id;
+[2023-04-30T03:09:17.670Z][QUERY]: SELECT * FROM current_schema()
+[2023-04-30T03:09:17.690Z][QUERY]: SELECT version();
+[2023-04-30T03:09:17.691Z][QUERY]: START TRANSACTION
+[2023-04-30T03:09:17.692Z][QUERY]: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+[2023-04-30T03:09:17.696Z][QUERY]: COMMIT
+[2023-04-30T03:09:35.559Z][QUERY]: SELECT
+      attractions.name as attr_name,
+      attractions.time_start,
+      attractions.time_end,
+      attractions.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM attractions
+  JOIN category c on c.id = attractions.category_id
+  JOIN cities c2 on attractions.city_id = c2.id;
+[2023-04-30T03:21:11.794Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:22:42.588Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:40.203Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:43.246Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:43.445Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:47.140Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:51.199Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:23:59.274Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:05.793Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:17.354Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:22.036Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:36.401Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:39.681Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:46.332Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:51.115Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:54.377Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:57.077Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:24:59.918Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:25:59.921Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:26:40.888Z][QUERY]: SELECT
+      relax.name as relax_name,
+      relax.time_start,
+      relax.time_end,
+      relax.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM relax
+  JOIN category c on c.id = relax.category_id
+  JOIN cities c2 on relax.city_id = c2.id;
+[2023-04-30T03:34:25.159Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:28.980Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:31.878Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:37.181Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:41.810Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:46.876Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:49.530Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:52.994Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:56.800Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:34:59.650Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:57:54.366Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:58:01.081Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:58:03.436Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;
+[2023-04-30T03:58:07.535Z][QUERY]: SELECT
+      shops.name as shop_name,
+      shops.time_start,
+      shops.time_end,
+      shops.description,
+      c.name as category_name,
+      c.description as category_description,
+      c2.name as city_name
+   FROM shops
+  JOIN category c on c.id = shops.category_id
+  JOIN cities c2 on shops.city_id = c2.id;

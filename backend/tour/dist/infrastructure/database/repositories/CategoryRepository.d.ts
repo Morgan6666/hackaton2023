@@ -4,6 +4,7 @@ import { ICategoryRepository } from "application/ports/ICategoryRepository";
 import { Connection } from "typeorm";
 import { GetRoadMapInfoByIdModel } from "domain/models/GetRoadMapInfoByIdModel";
 import { AddInfoModel } from "domain/models/AddInfoModel";
+import { AddRoadMapModel } from "domain/models/AddRoadMapModel";
 export declare class CategoriesRepository extends BaseRepository<CategoryModel> implements ICategoryRepository {
     connection: Connection;
     constructor(connection: Connection);
@@ -18,4 +19,9 @@ export declare class CategoriesRepository extends BaseRepository<CategoryModel> 
     updateAttractionInfo(entity: AddInfoModel): Promise<any>;
     updateRelaxInfo(entity: AddInfoModel): Promise<any>;
     updateEventInfo(entity: AddInfoModel): Promise<any>;
+    addRoadMap(entity: AddRoadMapModel): Promise<any>;
+    getEventsInfo(): Promise<any>;
+    getRelaxInfo(): Promise<any>;
+    getShopInfo(): Promise<any>;
+    getAttractionInfo(): Promise<any>;
 }

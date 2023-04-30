@@ -9,6 +9,7 @@ import { AttractionsModel } from "domain/models/AttractionsModel";
 import { EventModel } from "domain/models/EventModel";
 import { RelaxModel } from "domain/models/RelaxModel";
 import { AddInfoModel } from "domain/models/AddInfoModel";
+import { AddRoadMapModel } from "domain/models/AddRoadMapModel";
 
 @Injectable()
 export class CategoryUseCase {
@@ -157,6 +158,72 @@ export class CategoryUseCase {
     else{
       this.logger.warn('Категория не существует');
       return this.serviceRes.categoryDoesntExists();
+    }
+  }
+
+  async addRoadMap(entity: AddRoadMapModel){
+    this.logger.log(`Добавляем данные в табилцу road_map`);
+    const result = await this.categoryRepo.addRoadMap(entity);
+    if(result){
+      this.logger.log(`Данные road_map добавлены`);
+      return this.serviceRes.uniqueSuccessRes(result);
+    }
+    else{
+      this.logger.log(`Ошибка добавления данных`);
+      return this.serviceRes.internalServerError();
+    }
+  }
+
+  async getAttractionsInfo(){
+    this.logger.log(`Получаем данные о attractions`);
+    const result = await this.categoryRepo.getAttractionInfo();
+    if(result){
+      this.logger.log(`Данные получены`);
+      return this.serviceRes.uniqueSuccessRes(result);
+    }
+    else{
+      this.logger.log(`Данные не получены`);
+      return this.serviceRes.internalServerError();
+    }
+  }
+
+
+  async getShopsInfo(){
+    this.logger.log(`Получаем данные shops`);
+    const result = await this.categoryRepo.getShopInfo();
+    if(result){
+      this.logger.log(`Дынные получены `);
+      return this.serviceRes.uniqueSuccessRes(result);
+    }
+    else{
+      this.logger.log(`Данные не получены`);
+      return this.serviceRes.internalServerError();
+    }
+  }
+
+  async getEventsInfo(){
+    this.logger.log(`Получаем данные событий`);
+    const result = await this.categoryRepo.getEventsInfo();
+    if(result){
+      this.logger.log(`Данные получены`);
+      return this.serviceRes.uniqueSuccessRes(result);
+    }
+    else{
+      this.logger.log(`Данные не получены`);
+      return this.serviceRes.internalServerError();
+    }
+  }
+
+  async getRelaxInfo(){
+    this.logger.log(`Получаем данные relax`);
+    const result = await this.categoryRepo.getRelaxInfo();
+    if(result){
+      this.logger.log(`Данные получены`);
+      return this.serviceRes.uniqueSuccessRes(result);
+    }
+    else{
+      this.logger.log(`Данные не получены`);
+      return this.serviceRes.internalServerError();
     }
   }
 

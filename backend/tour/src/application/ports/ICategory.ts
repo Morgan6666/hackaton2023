@@ -15,6 +15,11 @@ export abstract class ICategory<Entity>{
     abstract updateRelaxInfo(entity: Entity);
     abstract updateAttractionInfo(entity: Entity);
     abstract updateEventInfo(entity: Entity);
+    abstract addRoadMap(entity: Entity);
+    abstract getRelaxInfo();
+    abstract getEventsInfo();
+    abstract getShopInfo();
+    abstract getAttractionInfo();
     
     
 }

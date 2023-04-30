@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const CategoryUseCase_1 = require("../../application/use-cases/CategoryUseCase");
 const AddInfoModel_1 = require("../../domain/models/AddInfoModel");
 const GetRoadMapInfoByIdModel_1 = require("../../domain/models/GetRoadMapInfoByIdModel");
+const AddRoadMapVM_1 = require("../view-models/category/AddRoadMapVM");
 let CategoriesController = class CategoriesController {
     constructor(catUseCases) {
         this.catUseCases = catUseCases;
@@ -60,6 +61,26 @@ let CategoriesController = class CategoriesController {
     }
     async updateRalax(data) {
         const result = await this.catUseCases.updateRelaxInfo(data);
+        return result;
+    }
+    async addRoadMap(data) {
+        const result = await this.catUseCases.addRoadMap(AddRoadMapVM_1.AddRoadMapVM.fromViewModel(data));
+        return result;
+    }
+    async getRelaxInfo() {
+        const result = await this.catUseCases.getRelaxInfo();
+        return result;
+    }
+    async getEvents() {
+        const result = await this.catUseCases.getEventsInfo();
+        return result;
+    }
+    async getAttractions() {
+        const result = await this.catUseCases.getAttractionsInfo();
+        return result;
+    }
+    async getShops() {
+        const result = await this.catUseCases.getShopsInfo();
         return result;
     }
 };
@@ -162,6 +183,40 @@ __decorate([
     __metadata("design:paramtypes", [AddInfoModel_1.AddInfoModel]),
     __metadata("design:returntype", Promise)
 ], CategoriesController.prototype, "updateRalax", null);
+__decorate([
+    (0, common_1.Post)("add_roadmap"),
+    (0, swagger_1.ApiOperation)({
+        summary: "Add roadmap"
+    }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [AddRoadMapVM_1.AddRoadMapVM]),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "addRoadMap", null);
+__decorate([
+    (0, common_1.Get)('relax'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "getRelaxInfo", null);
+__decorate([
+    (0, common_1.Get)('events'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "getEvents", null);
+__decorate([
+    (0, common_1.Get)('attractions'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "getAttractions", null);
+__decorate([
+    (0, common_1.Get)('shops'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoriesController.prototype, "getShops", null);
 CategoriesController = __decorate([
     (0, swagger_1.ApiTags)('Categories'),
     (0, common_1.Controller)('categories'),

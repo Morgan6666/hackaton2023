@@ -8,6 +8,7 @@ export class AddInfoModel implements IEntity {
     time_end?: string;
     user_id?: number;
     road_map_id?: number
+    city_name?: string
     
 
     constructor(
@@ -17,7 +18,8 @@ export class AddInfoModel implements IEntity {
         time_start?: string,
         time_end?: string,
         user_id?: number,
-        road_map_id?: number
+        road_map_id?: number,
+        city_name?: string
     ){
         this.name = name;
         this.description = description;
@@ -26,6 +28,7 @@ export class AddInfoModel implements IEntity {
         this.time_end = time_end;
         this.user_id = user_id;
         this.road_map_id = road_map_id;
+        this.city_name = city_name
     }
     equals(entity: IEntity): boolean {
         if (!(entity instanceof AddInfoModel)) return false;

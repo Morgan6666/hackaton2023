@@ -1,1 +1,1 @@
-{"version":3,"file":"ICategory.js","sourceRoot":"","sources":["../../../src/application/ports/ICategory.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAK5C,IAAsB,SAAS,GAA/B,MAAsB,SAAS;CAc9B,CAAA;AAdqB,SAAS;IAD9B,IAAA,mBAAU,GAAE;GACS,SAAS,CAc9B;AAdqB,8BAAS"}
+{"version":3,"file":"ICategory.js","sourceRoot":"","sources":["../../../src/application/ports/ICategory.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAA4C;AAK5C,IAAsB,SAAS,GAA/B,MAAsB,SAAS;CAmB9B,CAAA;AAnBqB,SAAS;IAD9B,IAAA,mBAAU,GAAE;GACS,SAAS,CAmB9B;AAnBqB,8BAAS"}

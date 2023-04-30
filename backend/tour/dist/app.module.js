@@ -15,6 +15,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const cache_1 = require("./infrastructure/cache");
 const environments_1 = require("./infrastructure/environments");
 const category_module_1 = require("./infrastructure/ioc/category.module");
+const quest_module_1 = require("./infrastructure/ioc/quest.module");
 const index_1 = require("./infrastructure/terminus/index");
 let AppModule = class AppModule {
 };
@@ -22,6 +23,7 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             category_module_1.CategoryModule,
+            quest_module_1.QuestModule,
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 expandVariables: true,

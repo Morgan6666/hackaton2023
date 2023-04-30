@@ -6,11 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CacheService } from 'infrastructure/cache';
 import { setEnvironment } from 'infrastructure/environments';
 import { CategoryModule } from 'infrastructure/ioc/category.module';
+import { QuestModule } from 'infrastructure/ioc/quest.module';
 import { HealthController } from 'infrastructure/terminus/index';
 
 @Module({
   imports: [
     CategoryModule,
+    QuestModule,
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,

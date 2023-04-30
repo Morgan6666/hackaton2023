@@ -1,9 +1,12 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { CategoryUseCase } from "application/use-cases/CategoryUseCase";
+import { throws } from "assert";
 import { AddInfoModel } from "domain/models/AddInfoModel";
+import { AddRoadMapModel } from "domain/models/AddRoadMapModel";
 import { GetRoadMapInfoByIdModel } from "domain/models/GetRoadMapInfoByIdModel";
 import { AddInfoVM } from "presentation/view-models/category/AddInfoVM";
+import { AddRoadMapVM } from "presentation/view-models/category/AddRoadMapVM";
 import { GetInfoByIdVM } from "presentation/view-models/category/GetInfoByIdVM";
 import { runInThisContext } from "vm";
 
@@ -103,4 +106,44 @@ export class CategoriesController {
         const result = await this.catUseCases.updateRelaxInfo(data);
         return result;
     }
+
+
+    @Post("add_roadmap")
+    @ApiOperation({
+        summary: "Add roadmap"
+    })
+    async addRoadMap(@Body() data: AddRoadMapVM){
+        const result = await this.catUseCases.addRoadMap(AddRoadMapVM.fromViewModel(data));
+        return result;
+    }
+
+    @Get('relax')
+    async getRelaxInfo(){
+        const result = await this.catUseCases.getRelaxInfo();
+        return result;
+    }
+
+    @Get('events')
+    async getEvents(){
+        const result = await this.catUseCases.getEventsInfo();
+        return result;
+    }
+
+    @Get('attractions')
+    async getAttractions(){
+        const result = await this.catUseCases.getAttractionsInfo();
+        return result;
+    }
+
+    @Get('shops')
+    async getShops(){
+        const result = await this.catUseCases.getShopsInfo();
+        return result;
+    }
 }
+
+
+// abstract getRelaxInfo();
+// abstract getEventsInfo();
+// abstract getShopInfo();
+// abstract getAttractionInfo();
