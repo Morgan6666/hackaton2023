@@ -1,4 +1,4 @@
-#Sun Apr 30 06:16:19 MSK 2023
+#Sun Apr 30 07:25:11 MSK 2023
 base.0=/home/morgan/StudioProjects/found_travell/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

@@ -18,4 +18,5 @@ class ProductUrl {
   static String getRelax = 'http://10.0.2.2:3012/categories/relax';
   static String getAttractions = 'http://10.0.2.2:3012/categories/attractions';
   static String getShops = 'http://10.0.2.2:3012/categories/shops';
+  static String getMapInfo = 'http://10.0.2.2:3012/categories/map_info';
 }

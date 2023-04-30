@@ -151,6 +151,22 @@ class ProductApi extends ApiProcessing {
 
   }
 
+  Future getRoadMapInfo(int id) async {
+    try{
+      Map<String, String> reqHeaders = {
+        'Content-Type': 'application/json',
+      };
+      final res= await http.post(Uri.parse(ProductUrl.getMapInfoUrl), headers: reqHeaders);
+      final resApi = res.body.toString();
+      final result = messageProcessing(resApi);
+      final data = result['Content'];
+      return data;
+
+    } on SocketException {
+      return 'Нестабильное соединение';
+    }
+  }
+
   Future updateShop(String name, String description, String time_start, String time_end,int road_map_id, int user_id, city_name) async {
     try{
       Map<String, String> reqHeaders = {

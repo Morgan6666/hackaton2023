@@ -5,6 +5,7 @@ import 'package:found_travell/core/utils/image_constant.dart';
 import 'package:found_travell/presentation/road/widget/get_attractions_info.dart';
 import 'package:found_travell/presentation/road/widget/get_events_info.dart';
 import 'package:found_travell/presentation/road/widget/get_food_info.dart';
+import 'package:found_travell/presentation/travell/travell_screen.dart';
 
 import '../../core/utils/sized_utils.dart';
 import '../../widgets/animation_routes.dart';
@@ -106,11 +107,14 @@ class RoadScreen extends State<Road> {
                           ),
                           child: SizedBox(
                               width: _media_width,
-                              child: FloatingActionButton(
-                                  isExtended: false,
-                                  elevation: 0,
-                                  onPressed: null,
-                                  backgroundColor: Colors.transparent,
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        SlideRightRoute(
+                                            widget: GetTravelInfoScreen()
+                                                .build(context)));
+                                  },
                                   child: Text(
                                     'Публичные маршруты',
                                     textAlign: TextAlign.center,
